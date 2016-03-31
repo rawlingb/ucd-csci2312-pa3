@@ -170,6 +170,7 @@ namespace Clustering {
                 delete __points;
                 __points = nullptr;
                 __size--;
+                centroid.setValid(false);
                 return *p;
             }
         }
@@ -187,6 +188,7 @@ namespace Clustering {
                             __points = __points->next;
                             delete tempNode;
                             __size--;
+                            centroid.setValid(false);
                             return *p;
                         } else {
                             Point *p = new Point(point);
@@ -194,6 +196,7 @@ namespace Clustering {
                             iteratePrev->next = iterateNext->next;
                             delete tempNode;
                             __size--;
+                            centroid.setValid(false);
                             return *p;
                         }
                     }
