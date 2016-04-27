@@ -11,6 +11,7 @@
 #include "Exceptions.h"
 
 namespace Clustering {
+    const char Point::POINT_VALUE_DELIM = ',';
     unsigned int Point::__idGen = 0;
 
     Point::Point(unsigned int dim) {
@@ -33,7 +34,11 @@ namespace Clustering {
 
     //Copy Constructor
     Point::Point(const Point &point) {
-		copy(point);
+        __id = point.__id;
+        __dim = point.__dim;
+        __values = new double[point.__dim];
+        for (int count = 0; count < __dim; count++)
+            __values[count] = point.__values[count];
     }
 
     //Destructor
@@ -47,16 +52,12 @@ namespace Clustering {
         if(*this == rhs)
             return *this;
         delete [] __values;
-        copy(rhs);
-        return *this;
-    }
-
-    void Point::copy(const Point &point) {
-        __id = point.__id;
-        __dim = point.__dim;
-        __values = new double[point.__dim];
+        __id = rhs.__id;
+        __dim = rhs.__dim;
+        __values = new double[rhs.__dim];
         for (int count = 0; count < __dim; count++)
-            __values[count] = point.__values[count];
+            __values[count] = rhs.__values[count];
+        return *this;
     }
 
     void Point::rewindIdGen(){

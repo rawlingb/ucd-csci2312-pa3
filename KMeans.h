@@ -34,20 +34,20 @@ namespace Clustering {
         ~KMeans();
 
         // accessors
-        unsigned int getMaxIter() { return __maxIter; };
-        unsigned int getNumIters() { return __numIter; };
-        unsigned int getNumNonemptyClusters(){ return __numNonempty; };
-        unsigned int getNumMovesLastIter() { return __numMovesLastIter; };
+        unsigned int getMaxIter();
+        unsigned int getNumIters();
+        unsigned int getNumNonemptyClusters();
+        unsigned int getNumMovesLastIter();
 
         // element access (for testing, no bounds checking)
-        Cluster &operator[](unsigned int u) { return *__clusters[u]; };
-        const Cluster &operator[](unsigned int u) const { return *__clusters[u]; };
+        Cluster &operator[](unsigned int u);
+        const Cluster &operator[](unsigned int u) const;
 
         // write out the results to a file
         friend std::ostream &operator<<(std::ostream &os, const KMeans &kmeans);
 
         // clustering functions
-        void run();//TODO: Have this use Cluster::Move::perform
+        void run();
     };
 
 }

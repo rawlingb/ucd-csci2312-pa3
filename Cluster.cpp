@@ -11,6 +11,7 @@
 #include "Exceptions.h"
 
 namespace Clustering {
+    const char Cluster::POINT_CLUSTER_ID_DELIM = ':';
     unsigned int Cluster::__idGenerator = 0;
     LNode::LNode(const Point &p, LNodePtr n) :
             point(p), next(n) { }
@@ -21,12 +22,14 @@ namespace Clustering {
 
     void Cluster::Centroid::set(const Point &p) {
         __p = p;
-        __ivalid = true;
+        __valid = true;
     }
 
     void Cluster::Centroid::setValid(bool valid) {
-        __ivalid = valid;
+        __valid = valid;
     }
+
+    bool Cluster::Centroid::isValid() const { return __valid; }
 
     void Cluster::Centroid::compute() {
         if(__c.__points == nullptr) {
@@ -57,8 +60,10 @@ namespace Clustering {
         for (int count = 0; count < __dimensions; count++) {
             __p[count] = std::numeric_limits<double>::max();
         }
-        __ivalid = false;
+        __valid = false;
     }
+
+    const Point Cluster::Centroid::get() const { return __p; }
 
     Cluster::Cluster(unsigned int d) : __points(nullptr), __size(0), __dimensionality(d),
         centroid(d, *this) {
@@ -67,7 +72,7 @@ namespace Clustering {
 
     Cluster::Cluster(const Cluster &cluster) : centroid(cluster.__dimensionality, *this), __dimensionality(cluster.__dimensionality) {
         __id = cluster.__id;
-        __cpy(cluster.__points, cluster.__size);
+        __cpy(cluster.__points);
         centroid.compute();
     }
 
@@ -75,7 +80,7 @@ namespace Clustering {
         if (*this == cluster && __id == cluster.__id){ return *this;}
         __del();
         __id = cluster.__id;
-        __cpy(cluster.__points, cluster.__size);
+        __cpy(cluster.__points);
         centroid.compute();
         return *this;
     }
@@ -87,11 +92,11 @@ namespace Clustering {
         __points = nullptr;
     }
 
-    void Cluster::__cpy(LNodePtr pts, unsigned int size) {
+    void Cluster::__cpy(LNodePtr pts) {
         __size = 0;
         __points = nullptr;
         LNode *iterate = pts;
-        for (int count = 0; count < size; count++) {
+        for (int count = 0; iterate != nullptr; count++) {
             this->add(iterate->point);
             iterate = iterate->next;
         }
@@ -439,5 +444,13 @@ namespace Clustering {
             }
         }
     }
+
+    bool Cluster::__in(const Point &p) const {
+        return false;
+    }
+
+    unsigned int Cluster::getId() const { return __id; }
+
+    unsigned int Cluster::getDimensionality() const { return __dimensionality; }
 }
 

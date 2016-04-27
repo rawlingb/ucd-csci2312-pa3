@@ -18,7 +18,7 @@ namespace Clustering {
         static unsigned int __idGen; // id generator
 
     public:
-        static const char POINT_VALUE_DELIM = ',';
+        static const char POINT_VALUE_DELIM;
 
         static void rewindIdGen();
 
@@ -29,8 +29,6 @@ namespace Clustering {
         Point(const Point &);
         Point &operator=(const Point &);
         ~Point();
-
-        void copy(const Point &);
 
         // Accessors & mutators
         int getId() const;

@@ -49,4 +49,26 @@ namespace Clustering {
         os << ex.__name << " Tried to initialize a K-Means object with no Clusters " << std::endl;
         return os;
     }
+
+    unsigned int OutOfBoundsEx::getCurrent() const { return __current; }
+
+    int OutOfBoundsEx::getRhs() const { return __rhs; }
+
+    std::string OutOfBoundsEx::getName() const { return __name; }
+
+    unsigned int DimensionalityMismatchEx::getCurrent() const { return __current; }
+
+    unsigned int DimensionalityMismatchEx::getRhs() const { return __rhs; }
+
+    std::string DimensionalityMismatchEx::getName() const { return __name; }
+
+    std::string ZeroClustersEx::getName() const { return __name; }
+
+    std::string DataFileOpenEx::getFilename() const { return __filename; }
+
+    std::string DataFileOpenEx::getName() const { return __name; }
+
+    std::string ZeroDimensionsEx::getName() const { return __name; }
+
+    std::string EmptyClusterEx::getName() const { return __name; }
 }

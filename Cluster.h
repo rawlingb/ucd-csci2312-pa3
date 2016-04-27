@@ -30,14 +30,14 @@ namespace Clustering {
         static unsigned int __idGenerator;
 
         void __del();
-        void __cpy(LNodePtr pts, unsigned int size);
-        //bool __in(const Point &p) const;
+        void __cpy(LNodePtr pts);
+        bool __in(const Point &p) const;
 
         // inner class has private access
         class Centroid {
             unsigned int __dimensions;
             Point __p;
-            bool __ivalid;
+            bool __valid;
             const Cluster &__c;
 
         public:
@@ -45,12 +45,12 @@ namespace Clustering {
 
             // no copy or assignment
             Centroid(const Centroid &cent) = delete;
-            Centroid &operator=(const Centroid &cent) = delete;
+            Centroid &operator[](const Centroid &cent) = delete;
 
             // getters/setters
-            const Point get() const { return __p; }; // doesn't check for validity
+            const Point get() const; // doesn't check for validity
             void set(const Point &p); // sets to valid
-            bool isValid() const { return __ivalid; };
+            bool isValid() const;
             void setValid(bool valid);
 
             // functions
@@ -60,7 +60,7 @@ namespace Clustering {
         };
 
     public:
-        static const char POINT_CLUSTER_ID_DELIM = ':';
+        static const char POINT_CLUSTER_ID_DELIM;
 
         Centroid centroid; // the cluster's centroid
 
@@ -73,8 +73,8 @@ namespace Clustering {
 
         // Getters
         unsigned int getSize() const;
-        unsigned int getDimensionality() const { return __dimensionality; };
-        unsigned int getId() const { return __id; };
+        unsigned int getDimensionality() const;
+        unsigned int getId() const;
 
         // Add/remove: They allow calling c1.add(c2.remove(p));
         void add(const Point &);

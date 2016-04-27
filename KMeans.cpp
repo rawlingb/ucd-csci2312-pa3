@@ -50,7 +50,7 @@ namespace Clustering {
         __initCentroids = nullptr;
     }
 
-
+    //TODO: Have this use Cluster::Move::perform
     void KMeans::run() {
         unsigned int moves = 100;
         unsigned int iter = 0;
@@ -98,5 +98,16 @@ namespace Clustering {
         return os;
     }
 
+    const Cluster &KMeans::operator[](unsigned int u) const { return *__clusters[u]; }
+
+    Cluster &KMeans::operator[](unsigned int u) { return *__clusters[u]; }
+
+    unsigned int KMeans::getNumMovesLastIter() { return __numMovesLastIter; }
+
+    unsigned int KMeans::getNumNonemptyClusters() { return __numNonempty; }
+
+    unsigned int KMeans::getNumIters() { return __numIter; }
+
+    unsigned int KMeans::getMaxIter() { return __maxIter; }
 }
 

@@ -17,9 +17,9 @@ namespace Clustering {
 
     public:
         OutOfBoundsEx(unsigned int c, int r);
-        unsigned int getCurrent() const { return __current; };
-        int getRhs() const { return __rhs; };
-        std::string getName() const { return __name; };
+        unsigned int getCurrent() const;
+        int getRhs() const;
+        std::string getName() const;
 
         friend std::ostream &operator<<(std::ostream &os, const OutOfBoundsEx &ex);
     };
@@ -32,9 +32,9 @@ namespace Clustering {
 
     public:
         DimensionalityMismatchEx(unsigned int c, unsigned int r);
-        unsigned int getCurrent() const { return __current; };
-        unsigned int getRhs() const { return __rhs; };
-        std::string getName() const { return __name; };
+        unsigned int getCurrent() const;
+        unsigned int getRhs() const;
+        std::string getName() const;
 
         friend std::ostream &operator<<(std::ostream &os, const DimensionalityMismatchEx &ex);
     };
@@ -46,7 +46,7 @@ namespace Clustering {
 
     public:
         ZeroClustersEx();
-        std::string getName() const { return __name; };
+        std::string getName() const;
 
         friend std::ostream &operator<<(std::ostream &os, const ZeroClustersEx &ex);
     };
@@ -58,8 +58,8 @@ namespace Clustering {
 
     public:
         DataFileOpenEx(std::string filename);
-        std::string getFilename() const { return __filename; };
-        std::string getName() const { return __name; };
+        std::string getFilename() const;
+        std::string getName() const;
 
         friend std::ostream &operator<<(std::ostream &os, const DataFileOpenEx &ex);
     };
@@ -70,7 +70,7 @@ namespace Clustering {
 
     public:
         ZeroDimensionsEx();
-        std::string getName() const { return __name; };
+        std::string getName() const;
 
         friend std::ostream &operator<<(std::ostream &os, const ZeroDimensionsEx &ex);
     };
@@ -81,7 +81,7 @@ namespace Clustering {
 
     public:
         EmptyClusterEx();
-        std::string getName() const { return __name; };
+        std::string getName() const;
 
         friend std::ostream &operator<<(std::ostream &os, const EmptyClusterEx &ex);
     };
